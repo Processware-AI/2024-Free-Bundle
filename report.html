@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Free Bundle 2024 - Project Analysis Report</title>
+<style>
+:root{--bg:#0b1220;--card:#111a2e;--card2:#0f1728;--line:#293650;--text:#e5e7eb;--muted:#91a0bd;--accent:#38bdf8;--accent2:#22d3ee;--green:#34d399;--orange:#fdba74;--red:#f87171;--purple:#c084fc}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Segoe UI","Noto Sans KR",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding:0}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+.top-bar{position:sticky;top:0;z-index:100;background:rgba(11,18,32,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:10px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.top-bar h1{font-size:20px;font-weight:700;white-space:nowrap}
+.top-bar .stats{font-size:14px;color:var(--muted)}
+.search-box{flex:1;min-width:200px;max-width:400px;margin-left:auto}
+.search-box input{width:100%;padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:#0b1325;color:var(--text);font-size:14px;outline:none}
+.search-box input:focus{border-color:var(--accent)}
+.filter-bar{background:var(--card2);border-bottom:1px solid var(--line);padding:10px 24px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.filter-bar label{font-size:13px;color:var(--muted);margin-right:4px}
+.chip{display:inline-block;padding:4px 12px;border-radius:16px;font-size:13px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--muted);transition:.15s}
+.chip:hover{border-color:var(--accent);color:var(--text)}
+.chip.active{background:var(--accent);color:#00131b;border-color:var(--accent);font-weight:600}
+.chip .cnt{font-size:11px;opacity:.8;margin-left:3px}
+
+.container{max-width:1400px;margin:0 auto;padding:24px}
+.toc{margin-bottom:32px;padding:20px;background:var(--card);border-radius:12px;border:1px solid var(--line)}
+.toc h2{font-size:18px;margin-bottom:12px;color:var(--accent)}
+.toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
+.toc-item{font-size:14px;padding:6px 10px;border-radius:6px;transition:.1s}
+.toc-item:hover{background:rgba(56,189,248,.08)}
+.toc-item .num{color:var(--muted);font-family:monospace;margin-right:6px;font-size:12px}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(680px,1fr));gap:20px}
+@media(max-width:740px){.cards{grid-template-columns:1fr}}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:.2s}
+.card:hover{border-color:var(--accent);box-shadow:0 0 20px rgba(56,189,248,.08)}
+.card-head{padding:16px 20px 12px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:flex-start;gap:12px}
+.card-num{font-size:26px;font-weight:800;color:var(--accent);font-family:monospace;line-height:1;min-width:36px}
+.card-title-wrap{flex:1;min-width:0}
+.card-title{font-size:18px;font-weight:700;margin-bottom:2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.card-title a{color:var(--text)}
+.card-title a:hover{color:var(--accent)}
+.card-subtitle{font-size:13px;color:var(--muted)}
+.badge{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;white-space:nowrap}
+.badge-cat{background:#1e3a5f;color:var(--accent2)}
+.badge-server{background:#7c2d12;color:var(--orange)}
+.badge-static{background:#064e3b;color:var(--green)}
+
+.card-body{padding:16px 20px}
+.desc{font-size:14px;color:var(--text);margin-bottom:14px;line-height:1.7}
+.meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+@media(max-width:500px){.meta-grid{grid-template-columns:1fr}}
+.meta-box{background:var(--card2);border-radius:8px;padding:10px 12px;border:1px solid rgba(255,255,255,.04)}
+.meta-box .label{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.meta-box .value{font-size:13px;color:var(--text);line-height:1.5}
+
+.tech-list,.feature-list,.page-list{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.tech-tag{font-size:12px;padding:2px 8px;border-radius:4px;background:#1a2742;color:var(--accent);border:1px solid rgba(56,189,248,.15)}
+.feature-tag{font-size:12px;padding:2px 8px;border-radius:4px;background:#1e293b;color:var(--green);border:1px solid rgba(52,211,153,.15)}
+.page-tag{font-size:12px;padding:2px 8px;border-radius:4px;background:#1e1b2e;color:var(--purple);border:1px solid rgba(192,132,252,.15)}
+.section-label{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+
+.summary-section{margin-bottom:32px}
+.summary-section h2{font-size:20px;font-weight:700;margin-bottom:16px;color:var(--accent);border-bottom:1px solid var(--line);padding-bottom:8px}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:20px}
+.summary-card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;text-align:center}
+.summary-card .big{font-size:32px;font-weight:800;color:var(--accent)}
+.summary-card .lbl{font-size:13px;color:var(--muted);margin-top:4px}
+
+.cat-group-title{font-size:17px;font-weight:700;color:var(--accent2);margin:28px 0 14px;padding:8px 14px;background:var(--card2);border-radius:8px;border-left:3px solid var(--accent2);display:flex;align-items:center;gap:8px}
+.cat-group-title .cnt{font-size:13px;color:var(--muted)}
+
+.back-top{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#00131b;font-size:20px;border:none;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.4);z-index:99}
+.back-top.show{display:flex}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <h1>Free Bundle 2024 Report</h1>
+  <span class="stats" id="stats"></span>
+  <div class="search-box"><input id="search" type="search" placeholder="Search projects, tech, features..."/></div>
+</div>
+<div class="filter-bar" id="filterBar"></div>
+
+<div class="container">
+  <div class="summary-section" id="summary"></div>
+  <div id="tocWrap"></div>
+  <div id="content"></div>
+</div>
+
+<button class="back-top" id="backTop" title="Back to top">&#9650;</button>
+
+<script>
+const projects = [
+{"name":"ace","title":"Ace - Creative Photography Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","Slick Carousel","Google Fonts"],"pages":["index","about","portfolio","contact"],"features":["Responsive Design","Image Slider","Portfolio Gallery","Contact Form","Navigation Search"],"description":"사진 스튜디오 및 크리에이티브 에이전시를 위한 Bootstrap 4 기반의 웹 템플릿입니다. 풀스크린 슬라이드 이미지와 세련된 레이아웃이 특징이며, 포트폴리오 갤러리 및 연락처 페이지를 포함합니다. 깔끔하고 모던한 디자인으로 사진작가나 크리에이티브 전문가에게 적합합니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"사진작가, 크리에이티브 에이전시, 개인 포트폴리오 사이트","entry":"ace/index.html","needsServer":false,"category":"Business / Agency"},
+{"name":"andrea-master","title":"Andrea - Free Bootstrap 4 Blog Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","AOS","Owl Carousel","Magnific Popup","SCSS","Google Fonts","Ionicons","Flaticon"],"pages":["index","fashion","travel","about","contact","single"],"features":["Responsive Design","Sidebar Navigation","Newsletter Subscription","Blog Posts","Animation","Image Gallery","Social Links"],"description":"Colorlib에서 제작한 개인 블로그 전용 Bootstrap 4 템플릿으로, 사이드바 내비게이션 방식의 독특한 레이아웃을 사용합니다. 패션, 여행 등 다양한 카테고리를 지원하며 AOS 스크롤 애니메이션과 Owl Carousel이 적용되어 있습니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"개인 블로그, 패션 블로그, 여행 블로그, 라이프스타일 콘텐츠 사이트","entry":"andrea-master/index.html","needsServer":false,"category":"Blog / Magazine"},
+{"name":"arclabs-master","title":"Arclabs - Architecture Bootstrap 4 Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","Font Awesome","Owl Carousel","Magnific Popup","SCSS","Google Fonts","Parallax"],"pages":["index","about","services","projects","elements","blog-home","blog-single","contact","single"],"features":["Responsive Design","Parallax Hero","Image Gallery","Blog","Dropdown Navigation","Contact Form","Project Portfolio"],"description":"건축 회사 및 인테리어 디자인 스튜디오를 위한 Bootstrap 4 기반 전문 템플릿입니다. 패럴랙스 스크롤 히어로 섹션과 풍부한 포트폴리오 갤러리 기능을 제공합니다. 전문적이고 세련된 디자인으로 건축 프로젝트 소개에 최적화되어 있습니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"건축 회사, 인테리어 디자인 스튜디오, 건설 회사","entry":"arclabs-master/index.html","needsServer":false,"category":"Architecture / Interior"},
+{"name":"arkitektur-1.0.0","title":"Arkitektur - Architecture HTML Template","tech":["HTML5","CSS3","Bootstrap 5","jQuery","Font Awesome","Bootstrap Icons","Owl Carousel","Animate.css","WOW.js","Google Fonts"],"pages":["index","about","service","feature","project","team","appointment","testimonial","contact","404"],"features":["Responsive Design","Loading Spinner","Image Carousel","WOW Animation","Appointment Booking","Topbar with Contact Info","Social Media Links","Testimonial","Team Members"],"description":"건축 및 건설 회사를 위한 Bootstrap 5 기반의 완성도 높은 멀티페이지 HTML 템플릿입니다. 로딩 스피너, Owl Carousel 헤더 슬라이더, WOW 스크롤 애니메이션 등 다양한 인터랙티브 요소를 포함합니다. 전문적이고 현대적인 디자인으로 건축 서비스와 프로젝트 소개에 적합합니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"건축 회사, 건설 업체, 리모델링 서비스, 인테리어 디자인 사무소","entry":"arkitektur-1.0.0/index.html","needsServer":false,"category":"Architecture / Interior"},
+{"name":"Augustine_1_0_0","title":"Augustine - Personal Portfolio Template","tech":["HTML5","CSS3","JavaScript","Google Fonts","SVG Icons"],"pages":["index"],"features":["Responsive Design","Single Page","Smooth Scroll","Preloader","Social Media Links","Resume/CV Section","Works Portfolio","Contact Section","Animation on Load"],"description":"디지털 디자이너 및 개발자를 위한 미니멀한 싱글 페이지 개인 포트폴리오 템플릿입니다. 스크롤 기반 내비게이션과 로드 시 애니메이션 효과가 적용되어 있으며, 이력서, 작업물, 연락처 섹션을 하나의 페이지에서 구성합니다. 깔끔하고 타이포그래피 중심의 세련된 디자인이 특징입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"디지털 디자이너, 프리랜서 개발자, 크리에이티브 전문가의 개인 포트폴리오","entry":"Augustine_1_0_0/index.html","needsServer":false,"category":"Portfolio / Personal"},
+{"name":"Birdor-1.0.0","title":"Birdor - Bird Watching & Aviary Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","Font Awesome","Google Fonts"],"pages":["index","about","birds","testimonial","contact"],"features":["Responsive Design","Image Carousel","Side Panel Navigation","Preloader","Social Links","Custom Slider"],"description":"조류 관찰 및 야생 조류 관련 사이트를 위한 Bootstrap 4 기반 웹 템플릿입니다. 슬라이드 사이드 패널 메뉴와 Bootstrap Carousel을 활용한 인터랙티브 내비게이션을 제공합니다. 자연 친화적이고 밝은 분위기의 디자인입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"조류 관찰 커뮤니티, 애완 조류 샵, 자연 생태 정보 사이트, 동물 관련 단체","entry":"Birdor-1.0.0/index.html","needsServer":false,"category":"Business / Agency"},
+{"name":"blogy-1.0.0","title":"Blogy - Free Bootstrap 5 Blog Template","tech":["HTML5","CSS3","Bootstrap 5","Bootstrap Icons","AOS","Tiny Slider","GLightbox","Flatpickr","Google Fonts","SCSS"],"pages":["index","blog","single","category","about","contact","search-result"],"features":["Responsive Design","AOS Animation","Image Lightbox","Search Functionality","Newsletter","Category Filtering","Blog Listing","Date Picker"],"description":"Untree.co에서 제작한 Bootstrap 5 기반의 현대적인 블로그 템플릿입니다. AOS 스크롤 애니메이션, GLightbox 이미지 뷰어, Tiny Slider 등 최신 라이브러리들을 활용하여 풍부한 사용자 경험을 제공합니다. 카테고리, 검색, 단일 포스트 등 완전한 블로그 기능을 갖추고 있습니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"개인 블로그, 뉴스 사이트, 온라인 매거진, 콘텐츠 미디어 플랫폼","entry":"blogy-1.0.0/index.html","needsServer":false,"category":"Blog / Magazine"},
+{"name":"cassi-master","title":"Cassi - Photo Studio HTML Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","Font Awesome","Owl Carousel","Elegant Icons","Magnific Popup","Google Fonts"],"pages":["index","gallery","blog","about","contact","blog-single"],"features":["Responsive Design","Offcanvas Menu","Image Gallery","Slider","Preloader","Photo Lightbox","Social Links","Blog"],"description":"Colorlib에서 제작한 사진 스튜디오 전용 HTML 템플릿으로, 오프캔버스 사이드 메뉴와 히어로 슬라이더를 특징으로 합니다. 감성적인 사진을 중심으로 한 갤러리 페이지와 블로그 기능을 포함하며, 스토리텔링 방식의 사진 전시에 최적화된 디자인입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"사진 스튜디오, 프로 사진작가, 크리에이티브 포트폴리오, 라이프스타일 브랜드","entry":"cassi-master/index.html","needsServer":false,"category":"Photography"},
+{"name":"dronephotography-main","title":"Drone Photography & Videography Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","Font Awesome","Owl Carousel","Slick Slider","Magnific Popup","Animate.css","Themify Icons","Flaticon","SlickNav"],"pages":["index","about","services","projects","blog","blog_details","elements","contact"],"features":["Responsive Design","Hero Slider","Preloader","Animated Headlines","Progress Bar","Image Gallery","Blog","Contact Form","Sticky Header","Mobile Menu"],"description":"드론 촬영 및 항공 사진/영상 서비스를 위한 동적이고 전문적인 Bootstrap 4 웹 템플릿입니다. 히어로 슬라이더와 애니메이션 헤드라인, 프로그레스 바 등 다양한 인터랙티브 요소를 갖추고 있습니다. 다크하고 임팩트 있는 시각적 스타일입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"드론 촬영 서비스, 항공 사진 스튜디오, 영상 제작 회사, 측량/지도 서비스 업체","entry":"dronephotography-main/index.html","needsServer":false,"category":"Photography"},
+{"name":"elegence-main","title":"Elegance - Creative Personal Portfolio Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","Font Awesome","Owl Carousel","FullPage.js","Animate.css","Google Fonts"],"pages":["index"],"features":["Responsive Design","Video Background","Full Page Scroll","Single Page","Animation","Skills Section","Portfolio Gallery","Testimonials","Contact Form","Preloader","Counter Stats"],"description":"동영상 배경과 FullPage.js 풀스크린 스크롤을 활용한 크리에이티브 개인 포트폴리오 템플릿입니다. 홈, 소개, 서비스, 스킬, 포트폴리오, 추천사, 연락처를 하나의 싱글 페이지에 담은 세련된 구성입니다. 영상 배경과 애니메이션 효과가 어우러진 임팩트 있고 모던한 디자인이 특징입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"프리랜서 디자이너, 웹 개발자, 크리에이티브 디렉터, 개인 브랜드 포트폴리오","entry":"elegence-main/index.html","needsServer":false,"category":"Portfolio / Personal"},
+{"name":"elen-master","title":"Elen - Free Bootstrap 4 Blog Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","AOS","Owl Carousel","Magnific Popup","SCSS","Google Fonts","Ionicons","Flaticon","Stellar.js"],"pages":["index","photography","travel","fashion","about","contact","single"],"features":["Responsive Design","Sidebar Navigation","Parallax Hero","AOS Animation","Blog Posts","Image Gallery","Social Links","Newsletter","Smooth Scroll"],"description":"Colorlib에서 제작한 개인 블로거를 위한 Bootstrap 4 템플릿으로, 사진, 여행, 패션 등 다양한 카테고리를 지원하는 사이드바 내비게이션 레이아웃을 사용합니다. 패럴랙스 히어로 이미지와 AOS 스크롤 애니메이션이 적용되어 있습니다. 감성적이고 콘텐츠 중심의 블로그 디자인이 특징입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"개인 블로거, 사진 블로그, 여행 블로그, 패션 인플루언서 사이트","entry":"elen-master/index.html","needsServer":false,"category":"Blog / Magazine"},
+{"name":"FestavaLive-1.0.0","title":"Festava Live - Music Festival Bootstrap 5 Template","tech":["HTML5","CSS3","Bootstrap 5","Bootstrap Icons","Google Fonts","JavaScript"],"pages":["index","ticket"],"features":["Responsive Design","Hero Section","Smooth Scroll","Artist Lineup","Event Schedule","Pricing/Ticket Section","Contact Form","Social Media Links","Video Section"],"description":"음악 페스티벌 및 라이브 이벤트 홍보를 위한 Bootstrap 5 기반 웹 템플릿입니다. 아티스트 라인업, 이벤트 일정, 티켓 구매 페이지 등 페스티벌에 필요한 핵심 섹션을 모두 포함합니다. 다크하고 화려한 분위기의 디자인으로 음악 행사와 엔터테인먼트 이벤트에 최적화되어 있습니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"음악 페스티벌, 콘서트 이벤트, 라이브 공연 홍보, 문화 행사 사이트","entry":"FestavaLive-1.0.0/index.html","needsServer":false,"category":"Entertainment / Event"},
+{"name":"foodeiblog-master","title":"Foodeiblog - Food Blog Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","Font Awesome","Owl Carousel","SCSS","SlickNav","Elegant Icons","Google Fonts"],"pages":["index","about","contact","categories-grid","categories-list","single-post","signin","404","typography"],"features":["Responsive Design","Page Preloader","Hamburger Menu","Newsletter Subscription","Carousel/Slider","Social Links","Dropdown Navigation","Sidebar"],"description":"음식 레시피와 요리 블로그를 위한 HTML 템플릿으로, 따뜻하고 감각적인 디자인이 특징입니다. 카테고리 그리드/리스트, 싱글 포스트, 로그인 등 블로그 운영에 필요한 다양한 페이지를 포함하고 있습니다. Bootstrap 기반의 반응형 레이아웃과 Owl Carousel 슬라이더를 활용한 세련된 구성입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"음식 레시피 블로그, 요리 전문 웹사이트, 푸드 인플루언서 개인 블로그","entry":"foodeiblog-master/index.html","needsServer":false,"category":"Food / Restaurant"},
+{"name":"fotogency-v1.0.0","title":"Fotogency - Photography Agency Template","tech":["HTML5","CSS3","Bootstrap 5","SCSS","JavaScript","Swiper","Font Awesome","GLightbox","Isotope","Gulp","Pug","Rellax","CountUp.js"],"pages":["index","portfolio","gallery","exhibitions","about","blog"],"features":["Responsive Design","Custom Cursor","Image Gallery","Portfolio Filter","Parallax Effect","Lightbox","Slider","Counter Animation","Offcanvas Navigation"],"description":"사진 에이전시 및 사진작가를 위한 세련된 Bootstrap 5 기반 HTML 템플릿입니다. Swiper 슬라이더, Isotope 포트폴리오 필터, GLightbox 라이트박스 등 다양한 인터랙티브 기능을 갖추고 있습니다. Gulp 빌드 시스템과 Pug 템플릿 엔진을 사용하며, 커스텀 커서와 패럴랙스 효과로 고급스러운 시각적 경험을 제공합니다.","run":"npm install 후 npm start로 개발 서버 실행","stop":"터미널에서 Ctrl+C로 서버 종료","usecase":"사진 에이전시, 전문 사진작가 포트폴리오, 사진 전시회 웹사이트","entry":"fotogency-v1.0.0/public/index.html","needsServer":true,"category":"Photography"},
+{"name":"foto-master","title":"Foto - Photography Portfolio Template","tech":["HTML5","CSS3","Bootstrap","jQuery","Revolution Slider","Ionicons","Google Fonts"],"pages":["index","portfolio-1","portfolio-2","blog","blog-single","regular-page"],"features":["Responsive Design","Full-Screen Revolution Slider","Ken Burns Effect","Parallax","Portfolio Gallery","Dropdown Navigation","Blog"],"description":"사진작가를 위한 전문적인 포트폴리오 HTML 템플릿으로, Revolution Slider를 활용한 풀스크린 슬라이더가 메인 비주얼을 담당합니다. Ken Burns 효과와 패럴랙스 줌 효과로 역동적인 비주얼을 연출하며, 두 가지 포트폴리오 레이아웃과 블로그 기능을 제공합니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"전문 사진작가 포트폴리오, 사진 스튜디오, 크리에이티브 에이전시","entry":"foto-master/index.html","needsServer":false,"category":"Photography"},
+{"name":"furni-1.0.0","title":"Furni - Furniture & Interior Design Store","tech":["HTML5","CSS3","Bootstrap 5","JavaScript","Font Awesome","Tiny Slider","Google Fonts"],"pages":["index","shop","about","services","blog","contact","cart","checkout","thankyou"],"features":["Responsive Design","Product Slider","Shopping Cart","E-commerce Layout","Hero Section","Newsletter","Dark Navigation"],"description":"가구 및 인테리어 디자인 쇼핑몰을 위한 Bootstrap 5 기반 무료 HTML 템플릿입니다. 쇼핑몰 운영에 필요한 홈, 상품 목록, 장바구니, 결제 등 완전한 E-commerce 페이지 세트를 제공합니다. Tiny Slider를 활용한 상품 슬라이더와 깔끔한 다크 네비게이션 바가 특징입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"가구 쇼핑몰, 인테리어 디자인 스튜디오, 홈 데코 온라인 스토어","entry":"furni-1.0.0/index.html","needsServer":false,"category":"E-commerce / Shop"},
+{"name":"furnics-1.0.0","title":"Furnics - Premium Furniture Store","tech":["HTML5","CSS3","Bootstrap 5","JavaScript","Swiper","Google Fonts","Modernizr"],"pages":["index"],"features":["Responsive Design","Page Preloader","Swiper Slider","Search Box","Shopping Cart","Smooth Scroll Spy","SVG Icons","Testimonials"],"description":"고급 가구 스토어를 위한 싱글 페이지 HTML 템플릿으로, Cinzel과 Poppins 폰트를 활용한 세련되고 우아한 디자인이 특징입니다. Swiper 슬라이더와 Bootstrap 5 스크롤 스파이 기능을 갖추고 있으며, SVG 인라인 아이콘을 활용한 서비스 안내 섹션을 포함합니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"프리미엄 가구 브랜드, 인테리어 소품 스토어, 홈 리빙 쇼핑몰","entry":"furnics-1.0.0/index.html","needsServer":false,"category":"E-commerce / Shop"},
+{"name":"girly-master","title":"Girly - Creative Personal Blog & Portfolio","tech":["HTML5","CSS3","Bootstrap 4","JavaScript","Google Fonts"],"pages":["index","blog"],"features":["Responsive Design","Full-Screen Hero Banner","Portfolio Grid","Testimonial Section","Contact Section","Social Links","Fixed Navigation"],"description":"여성 크리에이터를 위한 감각적이고 로맨틱한 분위기의 Bootstrap 4 기반 HTML 템플릿입니다. 풀스크린 히어로 이미지와 포트폴리오 그리드, 블로그 섹션을 포함한 원페이지 구성이 특징입니다. 핑크 계열의 그라데이션 색상과 부드러운 레이아웃으로 여성스럽고 세련된 디자인을 구현합니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"여성 크리에이터 포트폴리오, 패션/뷰티 블로거, 사진작가 개인 사이트","entry":"girly-master/index.html","needsServer":false,"category":"Photography"},
+{"name":"impulse","title":"Impulse - Netlify CMS Blog Template","tech":["HTML5","Tailwind CSS","Alpine.js","Eleventy","Netlify CMS","PostCSS","JavaScript"],"pages":["index","blog","categories","contact","admin"],"features":["Responsive Design","CMS Integration","Static Site Generation","Blog Posts","Category Filtering","Netlify Identity Authentication"],"description":"Netlify CMS와 Eleventy 정적 사이트 생성기를 기반으로 한 블로그 템플릿입니다. Tailwind CSS와 Alpine.js를 활용한 현대적인 기술 스택으로 구성되어 있으며, Netlify에 배포하여 CMS 기능을 활용할 수 있습니다. 콘텐츠 관리 시스템이 내장된 완전한 블로그 솔루션입니다.","run":"npm install 후 npm start로 개발 서버 실행 (Eleventy + PostCSS)","stop":"터미널에서 Ctrl+C로 서버 종료","usecase":"개인 블로그, 콘텐츠 크리에이터 사이트, CMS 기반 미디어 사이트","entry":"impulse/src/admin/index.html","needsServer":true,"category":"Business / Agency"},
+{"name":"klar-1.0.0","title":"Klar - Minimal Dark Bootstrap 5 Template","tech":["HTML5","CSS3","Bootstrap 5","JavaScript","AOS","Google Fonts","Eleventy"],"pages":["index","content","system"],"features":["Responsive Design","Dark Mode","Scroll Animation","Fixed Navigation","Hero Section","Minimal Design"],"description":"검정 배경의 미니멀하고 세련된 Bootstrap 5 기반 HTML 템플릿으로, Inter 폰트와 AOS 스크롤 애니메이션을 활용합니다. 다크 테마를 기본으로 하며 깔끔하고 현대적인 디자인 스타일을 추구합니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"테크 스타트업, SaaS 제품 랜딩 페이지, 개발자 포트폴리오","entry":"klar-1.0.0/index.html","needsServer":false,"category":"Landing Page"},
+{"name":"LifeStyleMag-1.0.0","title":"LifeStyle Magazine - HTML Magazine Template","tech":["HTML5","CSS3","JavaScript","Icomoon","Modernizr","Google Fonts"],"pages":["index"],"features":["Responsive Design","Magazine Layout","Featured Stories","Category Sections","Social Links","Hover Navigation Effects"],"description":"라이프스타일 매거진과 블로그를 위한 HTML 템플릿으로, 헬스, 러브, 패션 등 다양한 카테고리 섹션이 포함된 원페이지 매거진 레이아웃입니다. Icomoon 아이콘 폰트와 커스텀 호버 네비게이션 효과를 활용한 세련된 편집 디자인 스타일이 특징입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"라이프스타일 온라인 매거진, 뷰티/패션/건강 블로그, 디지털 미디어 사이트","entry":"LifeStyleMag-1.0.0/index.html","needsServer":false,"category":"Blog / Magazine"},
+{"name":"mark","title":"Mark - Personal Portfolio & Resume Template","tech":["HTML5","CSS3","Bootstrap 4","JavaScript","Font Awesome","Google Fonts"],"pages":["index","project","terms","privacy"],"features":["Responsive Design","Single Page Layout","Smooth Scroll","Fixed Navigation","Hero Section","Services Section","Contact Section","Social Icons","Offcanvas Menu"],"description":"개발자 또는 디자이너를 위한 개인 포트폴리오 및 이력서 HTML 템플릿입니다. Bootstrap 4와 Font Awesome을 기반으로 한 반응형 원페이지 구성으로, 소개, 서비스, 연락처 섹션을 포함합니다. 스무스 스크롤과 고정 내비게이션을 갖춘 심플하고 전문적인 디자인입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"웹 개발자/디자이너 개인 포트폴리오, 프리랜서 소개 사이트, 온라인 이력서","entry":"mark/index.html","needsServer":false,"category":"Landing Page"},
+{"name":"minimal-1.0.0","title":"Minimal - Portfolio Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","GSAP","AOS","Owl Carousel","Fancybox","Icomoon","Flaticon","Google Fonts"],"pages":["index","elements","portfolio-single-1","portfolio-single-2","portfolio-single-3"],"features":["Responsive Design","GSAP Animation","AOS Scroll Animation","Portfolio Grid","Isotope Filtering","AJAX Page Load","Lightbox","Owl Carousel","Smooth Scroll"],"description":"Untree.co에서 제작한 미니멀하고 클린한 디자인의 개인 포트폴리오 HTML 템플릿입니다. GSAP 애니메이션과 AOS 스크롤 효과를 활용하며, Isotope를 이용한 포트폴리오 필터링과 AJAX 기반 페이지 로딩 기능이 특징입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"크리에이티브 디자이너/개발자 포트폴리오, 프리랜서 작품 소개 사이트","entry":"minimal-1.0.0/index.html","needsServer":false,"category":"Portfolio / Personal"},
+{"name":"monica-1.0.0","title":"Monica - Personal Blog & Portfolio Template","tech":["HTML5","CSS3","JavaScript","Swiper","PrismJS","Google Fonts"],"pages":["index","about","services","blog","single","contact","generic","styles"],"features":["Responsive Design","Page Preloader","Swiper Slider","Syntax Highlighting","Contact Form","Newsletter","Social Links","Smooth Animation"],"description":"개인 블로그와 포트폴리오를 위한 세련되고 현대적인 HTML 템플릿으로, 자체 제작 CSS를 활용한 독창적인 디자인이 특징입니다. Swiper 슬라이더와 PrismJS 코드 하이라이팅을 내장하고 있으며, 블로그, 서비스, 연락처 등 완전한 페이지 구성을 제공합니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"개인 블로그, 크리에이티브 포트폴리오, 프리랜서 개인 브랜딩 사이트","entry":"monica-1.0.0/index.html","needsServer":false,"category":"Portfolio / Personal"},
+{"name":"moon-master","title":"Moon - Multipurpose Bootstrap 4 Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","Owl Carousel","Lightcase","Select2","LinearIcons","Google Fonts"],"pages":["index","contact","single"],"features":["Responsive Design","Hero Slider","Portfolio Section","Blog Section","Pricing Section","Image Lightbox","Smooth Scroll"],"description":"다목적 Bootstrap 4 HTML 템플릿입니다. 단일 페이지 구성으로 홈, 프로필, 블로그, 포트폴리오, 가격표 섹션을 포함하며 깔끔하고 현대적인 디자인 스타일을 가집니다. 히어로 이미지 배경과 Owl Carousel을 활용한 슬라이더가 특징입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"프리랜서, 에이전시, 개인 브랜드 등 다목적 비즈니스 소개 및 포트폴리오 사이트","entry":"moon-master/index.html","needsServer":false,"category":"Business / Agency"},
+{"name":"mosaic-master","title":"Mosaic - Architecture & Creative Agency Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","Owl Carousel","AOS","Animate.css","Magnific Popup","Ionicons","Flaticon","Google Fonts","SCSS"],"pages":["index","about","project","services","team","blog","blog-single","contact"],"features":["Responsive Design","Full-height Slider","Scroll Animation","Image Popup","Blog","Team Section","Contact Form","Services Section"],"description":"Colorlib에서 제작한 무료 Bootstrap 4 템플릿으로 건축 회사나 크리에이티브 에이전시를 위한 디자인입니다. Owl Carousel 기반의 풀스크린 슬라이더와 AOS 스크롤 애니메이션이 적용되어 있습니다. 다양한 내부 페이지(팀, 블로그, 서비스 등)를 갖춘 완성도 높은 다중 페이지 템플릿입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"건축 회사, 인테리어 디자인 스튜디오, 크리에이티브 에이전시","entry":"mosaic-master/index.html","needsServer":false,"category":"Architecture / Interior"},
+{"name":"mostudio-master","title":"Mostudio - Photography Studio Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","Owl Carousel","Magnific Popup","Animate.css","Font Awesome","Flaticon","Google Fonts","SCSS"],"pages":["index","gallery","about","pricing","contact","single"],"features":["Responsive Design","Side Navigation","Portfolio Gallery","Image Lightbox","Pricing Section","Newsletter Subscription","Smooth Animation"],"description":"Colorlib에서 제작한 사진/포트폴리오 스튜디오 전용 Bootstrap 4 템플릿입니다. 사이드바 방식의 네비게이션 메뉴를 사용하며, 풀스크린 포트폴리오 갤러리와 이미지 팝업 기능이 강조된 구성입니다. 흑백 대비의 강렬한 비주얼과 타이포그래피 중심의 고급스러운 디자인이 특징입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"사진 스튜디오, 포트폴리오 사이트, 예술가 및 크리에이티브 전문가","entry":"mostudio-master/index.html","needsServer":false,"category":"Photography"},
+{"name":"myportfolio-master","title":"MyPortfolio - Bootstrap Portfolio Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","AOS","Owl Carousel","IcoFont","Line Awesome","Google Fonts"],"pages":["index","about","services","works","work-single","contact"],"features":["Responsive Design","Portfolio Gallery","Scroll Animation","Off-canvas Navigation","Services Section","Contact Form","Works Filter"],"description":"BootstrapMade에서 제작한 개인 포트폴리오 Bootstrap 4 템플릿입니다. 오프캔버스 방식의 독특한 네비게이션 메뉴와 AOS 스크롤 애니메이션을 특징으로 하며, 미니멀하고 타이포그래피 중심의 다크 테마 디자인을 제공합니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"프리랜서 개발자, 디자이너, 사진작가 등 개인 포트폴리오 사이트","entry":"myportfolio-master/index.html","needsServer":false,"category":"Portfolio / Personal"},
+{"name":"nextpage","title":"NextPage - Blog & Magazine HTML Template","tech":["HTML5","CSS3","JavaScript","jQuery","Font Awesome","Google Fonts"],"pages":["index"],"features":["Responsive Design","Preloader","Search Popup","Top Bar","Social Media Links","Magazine Layout","Blog Grid"],"description":"블로그 및 온라인 매거진을 위한 HTML 템플릿입니다. 상단 정보 바와 소셜 미디어 링크, 광고 배너 영역을 갖춘 전통적인 뉴스/매거진 레이아웃을 제공합니다. 프리로더 애니메이션과 팝업 검색 기능이 포함된 Lite 버전입니다.","run":"nextpage-lite/index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"블로그, 온라인 뉴스 매거진, 미디어 사이트","entry":"nextpage-lite/index.html","needsServer":false,"category":"Blog / Magazine"},
+{"name":"Nimo-1.0.0","title":"Nimo - Community & Lifestyle Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","Owl Carousel","Font Awesome","FancyBox","mCustomScrollbar","Google Fonts"],"pages":["index","about","forum","gallery","testimonial","contact"],"features":["Responsive Design","Hero Carousel Slider","Image Gallery","FancyBox Lightbox","Forum Page","Testimonial Section","Social Icons","Custom Scrollbar"],"description":"Bootstrap 4 기반의 커뮤니티 및 라이프스타일 웹사이트 템플릿입니다. 캐러셀 슬라이더와 갤러리, 포럼, 후기 페이지 등 커뮤니티 사이트에 필요한 다양한 페이지를 포함합니다. 심플하고 깔끔한 레이아웃에 소셜 미디어 아이콘과 사용자 친화적인 네비게이션이 특징입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"커뮤니티 사이트, 라이프스타일 블로그, 소셜 클럽, 온라인 포럼","entry":"Nimo-1.0.0/index.html","needsServer":false,"category":"Business / Agency"},
+{"name":"nomad-force-1.0.0","title":"Nomad Force - Video Studio Bootstrap 5 Template","tech":["HTML5","CSS3","Bootstrap 5","Bootstrap Icons","jQuery","AOS","Magnific Popup","Google Fonts"],"pages":["index","news-detail"],"features":["Responsive Design","Full-screen Video Hero","AOS Scroll Animation","Portfolio Section","News & Events","Video Background","Contact Section","Image Popup"],"description":"Bootstrap 5 기반의 영상 스튜디오 및 크리에이티브 에이전시 템플릿입니다. 페이지 최상단에 자동 재생되는 풀스크린 배경 영상이 인상적이며, AOS 라이브러리를 통한 스크롤 애니메이션이 적용되어 있습니다. 스튜디오 소개, 포트폴리오, 뉴스, 연락처 섹션이 포함됩니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"영상 제작 스튜디오, 미디어 프로덕션 회사, 크리에이티브 에이전시","entry":"nomad-force-1.0.0/index.html","needsServer":false,"category":"Business / Agency"},
+{"name":"Painto-1.0.0","title":"Painto - Painting & Art Services Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","Font Awesome","mCustomScrollbar","Google Fonts"],"pages":["index","about","services","blog","contact"],"features":["Responsive Design","Hero Carousel Slider","Top Contact Bar","Social Media Icons","Services Section","Blog Section","Contact Form","Search Bar"],"description":"페인팅 및 아트 서비스 비즈니스를 위한 Bootstrap 4 HTML 템플릿입니다. 상단에 위치 정보와 연락처가 표시되는 정보 바와 캐러셀 슬라이더를 갖추고 있습니다. 밝고 깔끔한 레이아웃에 서비스 소개, 블로그, 연락처 등 비즈니스 운영에 필요한 기본 페이지를 모두 포함합니다.","run":"Painto-1.0.0/html/index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"페인팅 서비스, 인테리어 업체, 예술 관련 소규모 비즈니스","entry":"Painto-1.0.0/html/index.html","needsServer":false,"category":"Business / Agency"},
+{"name":"photosen-master","title":"Photosen - Photography Portfolio Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","Owl Carousel","AOS","Swiper","Magnific Popup","LightGallery","Flaticon","IcoMoon","Google Fonts","SCSS"],"pages":["index","about","services","contact","single"],"features":["Responsive Design","Full-screen Navigation","AOS Scroll Animation","Swiper Slider","Image Gallery","LightGallery Lightbox","Services Section","Date Picker"],"description":"Colorlib에서 제작한 사진 포트폴리오 전문 Bootstrap 4 템플릿입니다. Swiper와 Owl Carousel을 함께 활용하고 LightGallery 기반의 고급 이미지 갤러리를 제공하며, AOS 스크롤 애니메이션으로 세련된 사용자 경험을 구현합니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"전문 사진작가, 사진 스튜디오, 포트폴리오 사이트","entry":"photosen-master/index.html","needsServer":false,"category":"Photography"},
+{"name":"photozone-1.0.0","title":"Photozone - Photo Studio Website Template","tech":["HTML5","CSS3","Bootstrap 5","jQuery","Font Awesome","Bootstrap Icons","Owl Carousel","Animate.css","Lightbox","Google Fonts","SCSS"],"pages":["index","about","service","project","feature","team","testimonial","contact","404"],"features":["Responsive Design","Hero Section","WOW.js Animation","Carousel Slider","Image Lightbox","Team Section","Testimonial Section","404 Page","Spinner Loader"],"description":"Bootstrap 5 기반의 사진 스튜디오 전문 웹사이트 템플릿입니다. 가운데 로고를 배치한 대칭형 네비게이션 바 레이아웃이 독특하며, WOW.js 스크롤 애니메이션과 Lightbox 이미지 뷰어를 갖추고 있습니다. 팀, 후기, 서비스, 404 페이지 등 완성도 높은 서브 페이지를 포함합니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"사진 스튜디오, 웨딩 사진, 상업 사진 서비스 비즈니스","entry":"photozone-1.0.0/index.html","needsServer":false,"category":"Photography"},
+{"name":"PodTalk-1.0.0","title":"Pod Talk - Bootstrap 5 Podcast Template","tech":["HTML5","CSS3","Bootstrap 5","Bootstrap Icons","jQuery","Owl Carousel","Google Fonts"],"pages":["index","about","listing-page","detail-page","contact"],"features":["Responsive Design","Podcast Carousel","Search Bar","Hero Section","Episode Listing","Episode Detail","Spinner Loader","Smooth Scroll"],"description":"Bootstrap 5 기반의 팟캐스트 및 오디오 콘텐츠 플랫폼 템플릿입니다. Owl Carousel을 활용한 팟캐스터 프로필 슬라이더와 에피소드 목록 및 상세 페이지를 포함하는 팟캐스트 특화 레이아웃을 제공합니다. 어두운 계열의 세련된 색상 조합과 깔끔한 타이포그래피가 특징입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"팟캐스트 방송, 오디오 스트리밍 서비스, 미디어 채널","entry":"PodTalk-1.0.0/index.html","needsServer":false,"category":"Podcast / Media"},
+{"name":"proman-1.0.0","title":"ProMan - Personal Portfolio HTML Template","tech":["HTML5","CSS3","Bootstrap 5","Font Awesome","Bootstrap Icons","jQuery","Owl Carousel","Animate.css","Lightbox","Google Fonts","SCSS"],"pages":["index"],"features":["Responsive Design","Single Page Layout","Scroll Spy","Spinner Loader","WOW.js Animation","Skills Section","Portfolio/Projects","Team Section","Testimonials","Contact Section"],"description":"Bootstrap 5 기반의 개인 포트폴리오 단일 페이지(One-Page) HTML 템플릿입니다. 스크롤 스파이 방식으로 홈, 소개, 스킬, 서비스, 프로젝트, 팀, 후기, 연락처 섹션이 한 페이지에 구성되어 있습니다. WOW.js 애니메이션과 Lightbox를 활용한 깔끔하고 전문적인 디자인이 특징입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"개인 개발자, 디자이너, 컨설턴트 등의 개인 포트폴리오 및 이력서 사이트","entry":"proman-1.0.0/index.html","needsServer":false,"category":"Portfolio / Personal"},
+{"name":"sided-master","title":"Sided - Split Layout Landing Page","tech":["HTML5","CSS3","Bootstrap 4","Font Awesome","JavaScript"],"pages":["index","page-2","page-3"],"features":["Responsive Design","Two-Column Layout","Parallax Background","Fixed Sidebar"],"description":"Bootstrap 4 기반의 투 컬럼(Split) 레이아웃 템플릿으로, 왼쪽에 배경 이미지, 오른쪽에 콘텐츠를 배치하는 독특한 분할 디자인을 채택하고 있습니다. 깔끔하고 현대적인 스타일로 3개의 HTML 페이지를 제공합니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"개인 포트폴리오, 소규모 브랜드 소개 페이지, 크리에이티브 에이전시 랜딩 페이지","entry":"sided-master/index.html","needsServer":false,"category":"Landing Page"},
+{"name":"snap-1.0.0","title":"Snap - Photographer Portfolio Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","SCSS","AOS","Owl Carousel","Magnific Popup","Fancybox","Icomoon","Flaticon"],"pages":["index"],"features":["Responsive Design","Animation","Image Gallery","Slider","Parallax","Contact Form","Testimonials","Blog Section","Social Links"],"description":"Untree.co에서 제작한 사진작가 전용 원페이지 포트폴리오 템플릿으로, AOS 스크롤 애니메이션과 Owl Carousel 슬라이더를 활용한 세련된 디자인입니다. 히어로 이미지, 사진 갤러리, 소개, 고객 후기, 블로그, 연락처 섹션을 포함합니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"사진작가, 프리랜서 크리에이터, 비주얼 아티스트의 개인 포트폴리오","entry":"snap-1.0.0/index.html","needsServer":false,"category":"Photography"},
+{"name":"snapshot-master","title":"Snapshot - Photography Fullscreen Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","SCSS","AOS","Owl Carousel","Magnific Popup","Ionicons","Flaticon","Icomoon","Animate.css"],"pages":["index","work-single"],"features":["Responsive Design","Animation","Image Gallery","Fullscreen Hero","Parallax","Contact Form","Testimonials","Dot Navigation"],"description":"Colorlib에서 제작한 사진작가용 풀스크린 원페이지 템플릿으로, 측면 점(dot) 네비게이션과 풀스크린 히어로 섹션이 인상적인 세련된 디자인입니다. 포트폴리오 갤러리, 서비스 소개, 고객 후기 등 다양한 섹션이 포함되어 있습니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"전문 사진작가, 비주얼 크리에이터, 포트폴리오 소개가 필요한 프리랜서","entry":"snapshot-master/index.html","needsServer":false,"category":"Photography"},
+{"name":"snapx-1.0.0","title":"SnapX - Photography Contest Platform","tech":["HTML5","CSS3","Bootstrap 5","Font Awesome","Swiper","Animate.css","Owl Carousel","JavaScript"],"pages":["index","contests","contest-details","categories","users"],"features":["Responsive Design","Slider","Animation","Modal Login/Signup","Photo Contest","Category Browsing","User Profiles"],"description":"사진 공모전 및 커뮤니티 플랫폼용 템플릿으로, Bootstrap 5와 Swiper 슬라이더를 활용한 현대적인 디자인입니다. 로그인/회원가입 모달, 사진 콘테스트 목록, 카테고리, 유저 페이지 등 커뮤니티 기능에 특화된 다중 페이지 구조입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"사진 공모전 플랫폼, 사진 커뮤니티 사이트, 포토 갤러리 서비스","entry":"snapx-1.0.0/index.html","needsServer":false,"category":"Photography"},
+{"name":"Spurgeon_1_0_0","title":"Spurgeon - Lifestyle Blog Template","tech":["HTML5","CSS3","JavaScript"],"pages":["index","about","contact","category","single-standard","single-audio","single-video","styles"],"features":["Responsive Design","Blog Layout","Preloader","Category Navigation","Audio/Video Post Types","PWA Manifest"],"description":"Styleshout에서 제작한 깔끔하고 미니멀한 라이프스타일 블로그 템플릿으로, 콘텐츠 중심의 우아한 디자인이 특징입니다. 표준, 오디오, 비디오 등 다양한 포스트 타입과 카테고리 페이지를 지원하는 완성도 높은 블로그 구조를 갖추고 있습니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"라이프스타일 블로거, 인플루언서, 개인 저널리스트의 블로그 사이트","entry":"Spurgeon_1_0_0/index.html","needsServer":false,"category":"Blog / Magazine"},
+{"name":"stride-1.0.0","title":"Stride - Bootstrap 5 SaaS Landing Template","tech":["HTML5","CSS3","Bootstrap 5","JavaScript","Eleventy"],"pages":["index","content","register","404"],"features":["Responsive Design","Scroll Spy Navigation","Fixed Navbar","Registration Form","404 Page","Clean Typography"],"description":"Eleventy로 생성된 Bootstrap 5 기반의 심플하고 깔끔한 멀티페이지 HTML 템플릿입니다. 서비스, 기능 소개 등 SaaS나 스타트업 랜딩 페이지에 적합한 섹션 구성을 갖추고 있으며 Inter 폰트를 사용한 현대적인 타이포그래피가 특징입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"SaaS 서비스, 스타트업, 소프트웨어 제품 소개 랜딩 페이지","entry":"stride-1.0.0/index.html","needsServer":false,"category":"Business / Agency"},
+{"name":"studio-master","title":"Studio - Creative Photography Template","tech":["HTML5","CSS3","Bootstrap 4","jQuery","Font Awesome","JavaScript"],"pages":["index","about-me","portfolio","blog","contact","elements"],"features":["Responsive Design","Preloader","Portfolio Gallery","Blog","Contact Form","Dropdown Menu","Animation"],"description":"크리에이티브 사진작가를 위한 Bootstrap 4 기반 멀티페이지 템플릿으로, 프리로더 애니메이션과 그라디언트 배경 오버레이가 인상적인 세련된 디자인입니다. 포트폴리오, 블로그, 연락처 등 6개의 완성된 페이지를 제공합니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"전문 사진작가, 비주얼 아티스트, 크리에이티브 에이전시의 포트폴리오","entry":"studio-master/index.html","needsServer":false,"category":"Photography"},
+{"name":"swanky-1.0.0","title":"Swanky - Fashion Store Template","tech":["HTML5","CSS3","Bootstrap 5","Swiper","Icomoon","JavaScript"],"pages":["index","about-us","shop","single-product","blog","blog-with-sidebar","single-post"],"features":["Responsive Design","Slider","E-commerce Layout","Dropdown Navigation","Product Showcase","Blog"],"description":"Bootstrap 5 기반의 패션 쇼핑몰 템플릿으로, Swiper 슬라이더와 깔끔한 쇼핑몰 레이아웃이 특징입니다. Syne 및 DM Sans 폰트를 사용한 현대적이고 트렌디한 패션 브랜드 디자인으로 구성되어 있습니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"패션 브랜드, 의류 쇼핑몰, 라이프스타일 스토어의 온라인 쇼핑몰","entry":"swanky-1.0.0/index.html","needsServer":false,"category":"E-commerce / Shop"},
+{"name":"ultras-1.0.0","title":"Ultras - Clothing Store eCommerce","tech":["HTML5","CSS3","Bootstrap 4","Font Awesome","Icomoon","jQuery","JavaScript"],"pages":["index","about","blog","contact","shop","single-post","thank-you","styles"],"features":["Responsive Design","E-commerce Layout","Search Popup","Preloader","Product Listing","Blog","Contact Form","Shopping Cart"],"description":"의류 쇼핑몰 전용 Bootstrap 4 기반 이커머스 템플릿으로, 검색 팝업, 장바구니, 상품 카테고리 브라우징 기능을 갖춘 완성도 높은 쇼핑몰 UI입니다. 남성/여성 패션, 후디, 키즈 등 다양한 카테고리를 지원하는 다중 페이지 구조입니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"의류 및 패션 쇼핑몰, 스트리트웨어 브랜드, 온라인 의류 스토어","entry":"ultras-1.0.0/index.html","needsServer":false,"category":"E-commerce / Shop"},
+{"name":"vintagefur-1.0.0","title":"Vintage Fur - Furniture & Interior Store","tech":["HTML5","CSS3","Bootstrap 4","jQuery","Font Awesome","Owl Carousel","Fancybox","mCustomScrollbar","JavaScript"],"pages":["index","services","about","shop","contact"],"features":["Responsive Design","Carousel Slider","Product Showcase","Image Gallery","Contact Form","Search"],"description":"Bootstrap 4 기반의 가구 및 인테리어 쇼핑몰 템플릿으로, Owl Carousel 배너 슬라이더와 Fancybox 이미지 뷰어를 활용한 클래식하고 따뜻한 느낌의 디자인입니다. 서비스, 상품, 소개, 연락처 등 5개의 완성된 페이지로 구성되어 있습니다.","run":"index.html을 브라우저에서 직접 열기","stop":"브라우저 탭 닫기","usecase":"가구, 인테리어, 홈 데코 쇼핑몰 및 앤티크/빈티지 제품 판매 사이트","entry":"vintagefur-1.0.0/index.html","needsServer":false,"category":"E-commerce / Shop"}
+];
+
+// ── Derived data ──
+const catOrder = ["Photography","Business / Agency","Portfolio / Personal","Blog / Magazine","E-commerce / Shop","Architecture / Interior","Landing Page","Food / Restaurant","Entertainment / Event","Podcast / Media"];
+const catCounts = {};
+catOrder.forEach(c => catCounts[c] = 0);
+projects.forEach(p => catCounts[p.category] = (catCounts[p.category]||0)+1);
+
+const allTech = {};
+projects.forEach(p => p.tech.forEach(t => allTech[t]=(allTech[t]||0)+1));
+const topTech = Object.entries(allTech).sort((a,b)=>b[1]-a[1]).slice(0,10);
+
+const staticCount = projects.filter(p=>!p.needsServer).length;
+const serverCount = projects.filter(p=>p.needsServer).length;
+const totalPages = projects.reduce((s,p)=>s+p.pages.length,0);
+
+// ── Stats ──
+document.getElementById('stats').textContent = projects.length+' projects \u00b7 '+catOrder.length+' categories';
+
+// ── Filter bar ──
+const filterBar = document.getElementById('filterBar');
+filterBar.innerHTML = '<label>Category:</label>';
+const allChip = document.createElement('button');
+allChip.className='chip active';allChip.dataset.cat='all';allChip.innerHTML='All<span class="cnt">'+projects.length+'</span>';
+filterBar.appendChild(allChip);
+catOrder.forEach(cat=>{
+  if(!catCounts[cat])return;
+  const b=document.createElement('button');
+  b.className='chip';b.dataset.cat=cat;
+  b.innerHTML=cat+'<span class="cnt">'+catCounts[cat]+'</span>';
+  filterBar.appendChild(b);
+});
+
+let activeCat='all';
+filterBar.addEventListener('click',e=>{
+  const chip=e.target.closest('.chip');if(!chip)return;
+  filterBar.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  chip.classList.add('active');
+  activeCat=chip.dataset.cat;
+  render();
+});
+
+// ── Search ──
+const searchInput=document.getElementById('search');
+searchInput.addEventListener('input',()=>render());
+
+// ── Summary ──
+function renderSummary(){
+  const s=document.getElementById('summary');
+  s.innerHTML=`
+  <h2>Overview</h2>
+  <div class="summary-grid">
+    <div class="summary-card"><div class="big">${projects.length}</div><div class="lbl">Total Projects</div></div>
+    <div class="summary-card"><div class="big">${catOrder.length}</div><div class="lbl">Categories</div></div>
+    <div class="summary-card"><div class="big">${staticCount}</div><div class="lbl">Static (Browser)</div></div>
+    <div class="summary-card"><div class="big" style="color:var(--orange)">${serverCount}</div><div class="lbl">Server Required</div></div>
+    <div class="summary-card"><div class="big">${totalPages}</div><div class="lbl">Total Pages</div></div>
+  </div>
+  <div style="margin-bottom:16px">
+    <div class="section-label" style="margin-bottom:8px">Top Technologies</div>
+    <div class="tech-list">${topTech.map(([t,c])=>'<span class="tech-tag">'+t+' ('+c+')</span>').join('')}</div>
+  </div>
+  `;
+}
+renderSummary();
+
+// ── Render ──
+function render(){
+  const q=searchInput.value.trim().toLowerCase();
+  let filtered=projects;
+  if(activeCat!=='all') filtered=filtered.filter(p=>p.category===activeCat);
+  if(q) filtered=filtered.filter(p=>{
+    const s=(p.name+' '+p.title+' '+p.category+' '+p.tech.join(' ')+' '+p.features.join(' ')+' '+p.description+' '+p.usecase).toLowerCase();
+    return q.split(/\s+/).every(t=>s.includes(t));
+  });
+
+  // TOC
+  const tocWrap=document.getElementById('tocWrap');
+  tocWrap.innerHTML='<div class="toc"><h2>Table of Contents ('+filtered.length+' projects)</h2><div class="toc-grid" id="tocGrid"></div></div>';
+  const tocGrid=document.getElementById('tocGrid');
+  filtered.forEach((p,i)=>{
+    const d=document.createElement('div');d.className='toc-item';
+    d.innerHTML='<span class="num">'+(String(i+1).padStart(2,'0'))+'</span><a href="#proj-'+p.name+'">'+p.title+'</a>';
+    tocGrid.appendChild(d);
+  });
+
+  // Cards by category
+  const content=document.getElementById('content');
+  content.innerHTML='';
+  const grouped={};
+  filtered.forEach(p=>{if(!grouped[p.category])grouped[p.category]=[];grouped[p.category].push(p);});
+
+  let globalIdx=1;
+  catOrder.forEach(cat=>{
+    if(!grouped[cat])return;
+    const h=document.createElement('div');
+    h.className='cat-group-title';
+    h.innerHTML=cat+' <span class="cnt">('+grouped[cat].length+')</span>';
+    content.appendChild(h);
+
+    const grid=document.createElement('div');grid.className='cards';
+    grouped[cat].forEach(p=>{
+      const num=String(globalIdx).padStart(2,'0');
+      const serverBadge=p.needsServer?'<span class="badge badge-server">SERVER</span>':'<span class="badge badge-static">STATIC</span>';
+      const card=document.createElement('div');card.className='card';card.id='proj-'+p.name;
+      card.innerHTML=`
+        <div class="card-head">
+          <div class="card-num">${num}</div>
+          <div class="card-title-wrap">
+            <div class="card-title"><a href="${p.entry}" target="_blank">${p.title}</a>${serverBadge}<span class="badge badge-cat">${p.category}</span></div>
+            <div class="card-subtitle">${p.name}</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="desc">${p.description}</div>
+          <div class="meta-grid">
+            <div class="meta-box"><div class="label">Run</div><div class="value">${p.run}</div></div>
+            <div class="meta-box"><div class="label">Stop</div><div class="value">${p.stop}</div></div>
+            <div class="meta-box"><div class="label">Usecase</div><div class="value">${p.usecase}</div></div>
+            <div class="meta-box"><div class="label">Entry</div><div class="value"><a href="${p.entry}" target="_blank">${p.entry}</a></div></div>
+          </div>
+          <div class="section-label">Technologies</div>
+          <div class="tech-list">${p.tech.map(t=>'<span class="tech-tag">'+t+'</span>').join('')}</div>
+          <div class="section-label">Features</div>
+          <div class="feature-list">${p.features.map(f=>'<span class="feature-tag">'+f+'</span>').join('')}</div>
+          <div class="section-label">Pages (${p.pages.length})</div>
+          <div class="page-list">${p.pages.map(pg=>'<span class="page-tag">'+pg+'</span>').join('')}</div>
+        </div>`;
+      grid.appendChild(card);
+      globalIdx++;
+    });
+    content.appendChild(grid);
+  });
+}
+render();
+
+// ── Back to top ──
+const backTop=document.getElementById('backTop');
+window.addEventListener('scroll',()=>{backTop.classList.toggle('show',window.scrollY>400);});
+backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+</script>
+</body>
+</html>

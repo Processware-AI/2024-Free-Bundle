@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Bundle 2024 - Template Browser</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #111a2e;
+      --panel2: #0f1728;
+      --line: #293650;
+      --text: #e5e7eb;
+      --muted: #91a0bd;
+      --accent: #38bdf8;
+      --accent2: #22d3ee;
+      --chip: #1e293b;
+      --active: #1e293b;
+      --cat-bg: #141e33;
+      --cat-hover: #1a2742;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body { font-family: "Segoe UI", "Noto Sans KR", sans-serif; color: var(--text); background: var(--bg); }
+
+    .app { display: grid; grid-template-columns: 420px 1fr; height: 100vh; transition: grid-template-columns 0.3s ease; }
+    .app.sidebar-hidden { grid-template-columns: 0px 1fr; }
+
+    /* Sidebar */
+    .sidebar { border-right: 1px solid var(--line); background: var(--panel); display: flex; flex-direction: column; min-height: 0; overflow: hidden; transition: opacity 0.3s ease; }
+    .app.sidebar-hidden .sidebar { opacity: 0; pointer-events: none; }
+    .sidebar-header { padding: 14px 14px 10px; border-bottom: 1px solid var(--line); }
+    .title { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+    .subtitle { font-size: 16px; color: var(--muted); margin-bottom: 8px; }
+    .count { font-size: 18px; color: var(--muted); margin-bottom: 8px; }
+    .search { width: 100%; border: 1px solid var(--line); border-radius: 8px; background: #0b1325; color: var(--text); padding: 10px 12px 10px 36px; font-size: 20px; outline: none; }
+    .search:focus { border-color: var(--accent); }
+    .search-wrap { position: relative; }
+    .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 20px; pointer-events: none; }
+
+    .nav { overflow-y: auto; flex: 1; min-height: 0; }
+
+    /* Category groups */
+    .cat-group { border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .cat-header {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px; cursor: pointer; user-select: none;
+      font-size: 20px; font-weight: 600; color: var(--accent);
+      background: var(--cat-bg); border: none; width: 100%; text-align: left;
+      transition: background 0.15s;
+    }
+    .cat-header:hover { background: var(--cat-hover); }
+    .cat-header .arrow { font-size: 15px; transition: transform 0.2s; color: var(--muted); min-width: 18px; }
+    .cat-header.open .arrow { transform: rotate(90deg); }
+    .cat-badge { background: #1e3a5f; color: var(--accent2); font-size: 15px; padding: 2px 8px; border-radius: 10px; margin-left: auto; }
+    .cat-items { display: none; }
+    .cat-header.open + .cat-items { display: block; }
+    .cat-items .item { border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .cat-items .link {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 14px 7px 28px; text-decoration: none; color: var(--text);
+      font-size: 19px; line-height: 1.35; cursor: pointer; transition: background 0.1s;
+    }
+    .cat-items .link:hover { background: #1a2742; }
+    .cat-items .item.active .link { background: var(--active); color: #7dd3fc; font-weight: 600; }
+    .num { color: var(--muted); font-size: 15px; font-family: monospace; min-width: 32px; flex-shrink: 0; }
+    .tname { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+    .server-badge { font-size: 13px; background: #7c2d12; color: #fdba74; padding: 1px 7px; border-radius: 6px; flex-shrink: 0; margin-left: 4px; }
+    .folder-btn { background: none; border: none; color: var(--muted); font-size: 16px; cursor: pointer; padding: 2px 5px; border-radius: 4px; flex-shrink: 0; line-height: 1; text-decoration: none; }
+    .folder-btn:hover { color: var(--accent); background: rgba(56,189,248,0.1); }
+
+    /* Search results mode */
+    .search-results { display: none; overflow-y: auto; flex: 1; min-height: 0; }
+    .search-results .item { border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .search-results .link { display: flex; align-items: center; gap: 8px; padding: 9px 14px; text-decoration: none; color: var(--text); font-size: 19px; cursor: pointer; }
+    .search-results .link:hover { background: #1a2742; }
+    .search-results .item.active .link { background: var(--active); color: #7dd3fc; font-weight: 600; }
+    .search-results .cat-tag { font-size: 15px; color: var(--accent); background: #0e1b30; padding: 2px 8px; border-radius: 4px; flex-shrink: 0; }
+    .no-result { padding: 20px 14px; font-size: 20px; color: var(--muted); text-align: center; }
+
+    /* Main */
+    .main { display: flex; flex-direction: column; min-height: 0; }
+    .main-header {
+      border-bottom: 1px solid var(--line); display: flex; align-items: center;
+      justify-content: space-between; padding: 0 14px; background: #0d162a;
+      height: 46px; flex-shrink: 0; gap: 12px;
+    }
+    #currentName { font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .btn { border: 1px solid var(--line); background: #16233d; color: var(--text); border-radius: 7px; padding: 7px 10px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+    .btn:hover { background: #1d2c49; }
+    .btn-toggle { font-size: 16px; padding: 7px 10px; }
+    .btn-accent { text-decoration: none; background: linear-gradient(90deg, #22d3ee, var(--accent)); color: #00131b; border: none; }
+    .device-group { display: flex; gap: 2px; background: #0b1325; border-radius: 7px; padding: 2px; }
+    .device-btn { border: none; background: transparent; color: var(--muted); border-radius: 5px; padding: 5px 8px; font-size: 16px; cursor: pointer; line-height: 1; }
+    .device-btn:hover { color: var(--text); background: #1d2c49; }
+    .device-btn.active { color: var(--accent); background: #16233d; }
+    .viewer-wrap { flex: 1; display: flex; justify-content: center; background: #1a1a2e; min-height: 0; overflow: hidden; }
+    #viewer { border: 0; background: #fff; min-height: 0; transition: width 0.3s ease, height 0.3s ease; }
+    .viewer-wrap.mode-desktop #viewer { width: 100%; height: 100%; }
+    .viewer-wrap.mode-tablet #viewer { width: 768px; height: 100%; border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+    .viewer-wrap.mode-mobile #viewer { width: 375px; height: 100%; border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+
+    .empty-state { display: flex; align-items: center; justify-content: center; flex: 1; color: var(--muted); font-size: 14px; }
+
+    /* Responsive */
+    @media (max-width: 900px) { .app { grid-template-columns: 300px 1fr; } }
+    @media (max-width: 680px) {
+      .app { grid-template-columns: 1fr; grid-template-rows: 40vh 1fr; }
+      .sidebar { border-right: 0; border-bottom: 1px solid var(--line); }
+    }
+
+    /* Collapse/Expand all buttons */
+    .toolbar { display: flex; gap: 6px; margin-top: 8px; }
+    .toolbar button {
+      flex: 1; border: 1px solid var(--line); background: #16233d; color: var(--muted);
+      border-radius: 6px; padding: 6px; font-size: 16px; cursor: pointer;
+    }
+    .toolbar button:hover { background: #1d2c49; color: var(--text); }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="title">Free Bundle 2024</div>
+        <div class="subtitle">Categorized Template Browser</div>
+        <div class="count" id="count"></div>
+        <div class="search-wrap">
+          <span class="search-icon">&#128269;</span>
+          <input id="search" class="search" type="search" placeholder="Search templates by name or category..." />
+        </div>
+        <div class="toolbar">
+          <button id="expandAll" type="button">Expand All</button>
+          <button id="collapseAll" type="button">Collapse All</button>
+        </div>
+      </div>
+      <div id="nav" class="nav"></div>
+      <div id="searchResults" class="search-results"></div>
+    </aside>
+
+    <main class="main" id="mainArea">
+      <div class="main-header">
+        <div style="display:flex;align-items:center;gap:10px;overflow:hidden;">
+          <button id="toggleSidebar" class="btn btn-toggle" type="button" title="Toggle Sidebar">&#9776;</button>
+          <div class="device-group">
+            <button class="device-btn active" data-mode="desktop" title="Desktop">&#128187;</button>
+            <button class="device-btn" data-mode="tablet" title="Tablet">&#128195;</button>
+            <button class="device-btn" data-mode="mobile" title="Mobile">&#128241;</button>
+          </div>
+          <div id="currentName">&#8592; Select a template from the sidebar</div>
+        </div>
+        <div class="header-actions">
+          <button id="prevBtn" class="btn" type="button">&#9664; Prev</button>
+          <button id="nextBtn" class="btn" type="button">Next &#9654;</button>
+          <a id="openNewTab" class="btn btn-accent" href="#" target="_blank" rel="noopener noreferrer">Open in new tab &#8599;</a>
+        </div>
+      </div>
+      <div class="viewer-wrap mode-desktop" id="viewerWrap">
+        <iframe id="viewer" title="Template Viewer"></iframe>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.getElementById('toggleSidebar').addEventListener('click', function() {
+      document.querySelector('.app').classList.toggle('sidebar-hidden');
+    });
+    document.querySelectorAll('.device-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.device-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var wrap = document.getElementById('viewerWrap');
+        wrap.className = 'viewer-wrap mode-' + btn.dataset.mode;
+      });
+    });
+    const categories = {
+      "Photography":[
+        {"name":"cassi-master","entry":"cassi-master/index.html"},
+        {"name":"dronephotography-main","entry":"dronephotography-main/index.html"},
+        {"name":"fotogency-v1.0.0","entry":"fotogency-v1.0.0/public/index.html","server":true},
+        {"name":"foto-master","entry":"foto-master/index.html"},
+        {"name":"girly-master","entry":"girly-master/index.html"},
+        {"name":"mostudio-master","entry":"mostudio-master/index.html"},
+        {"name":"photosen-master","entry":"photosen-master/index.html"},
+        {"name":"photozone-1.0.0","entry":"photozone-1.0.0/index.html"},
+        {"name":"snap-1.0.0","entry":"snap-1.0.0/index.html"},
+        {"name":"snapshot-master","entry":"snapshot-master/index.html"},
+        {"name":"snapx-1.0.0","entry":"snapx-1.0.0/index.html"},
+        {"name":"studio-master","entry":"studio-master/index.html"}
+      ],
+      "Business / Agency":[
+        {"name":"ace","entry":"ace/index.html"},
+        {"name":"Birdor-1.0.0","entry":"Birdor-1.0.0/index.html"},
+        {"name":"impulse","entry":"impulse/src/admin/index.html","server":true},
+        {"name":"moon-master","entry":"moon-master/index.html"},
+        {"name":"Nimo-1.0.0","entry":"Nimo-1.0.0/index.html"},
+        {"name":"nomad-force-1.0.0","entry":"nomad-force-1.0.0/index.html"},
+        {"name":"Painto-1.0.0","entry":"Painto-1.0.0/html/index.html"},
+        {"name":"stride-1.0.0","entry":"stride-1.0.0/index.html"}
+      ],
+      "Portfolio / Personal":[
+        {"name":"Augustine_1_0_0","entry":"Augustine_1_0_0/index.html"},
+        {"name":"elegence-main","entry":"elegence-main/index.html"},
+        {"name":"minimal-1.0.0","entry":"minimal-1.0.0/index.html"},
+        {"name":"monica-1.0.0","entry":"monica-1.0.0/index.html"},
+        {"name":"myportfolio-master","entry":"myportfolio-master/index.html"},
+        {"name":"proman-1.0.0","entry":"proman-1.0.0/index.html"}
+      ],
+      "Blog / Magazine":[
+        {"name":"andrea-master","entry":"andrea-master/index.html"},
+        {"name":"blogy-1.0.0","entry":"blogy-1.0.0/index.html"},
+        {"name":"elen-master","entry":"elen-master/index.html"},
+        {"name":"LifeStyleMag-1.0.0","entry":"LifeStyleMag-1.0.0/index.html"},
+        {"name":"nextpage","entry":"nextpage-lite/index.html"},
+        {"name":"Spurgeon_1_0_0","entry":"Spurgeon_1_0_0/index.html"}
+      ],
+      "E-commerce / Shop":[
+        {"name":"furni-1.0.0","entry":"furni-1.0.0/index.html"},
+        {"name":"furnics-1.0.0","entry":"furnics-1.0.0/index.html"},
+        {"name":"swanky-1.0.0","entry":"swanky-1.0.0/index.html"},
+        {"name":"ultras-1.0.0","entry":"ultras-1.0.0/index.html"},
+        {"name":"vintagefur-1.0.0","entry":"vintagefur-1.0.0/index.html"}
+      ],
+      "Architecture / Interior":[
+        {"name":"arclabs-master","entry":"arclabs-master/index.html"},
+        {"name":"arkitektur-1.0.0","entry":"arkitektur-1.0.0/index.html"},
+        {"name":"mosaic-master","entry":"mosaic-master/index.html"}
+      ],
+      "Landing Page":[
+        {"name":"klar-1.0.0","entry":"klar-1.0.0/index.html"},
+        {"name":"mark","entry":"mark/index.html"},
+        {"name":"sided-master","entry":"sided-master/index.html"}
+      ],
+      "Food / Restaurant":[
+        {"name":"foodeiblog-master","entry":"foodeiblog-master/index.html"}
+      ],
+      "Entertainment / Event":[
+        {"name":"FestavaLive-1.0.0","entry":"FestavaLive-1.0.0/index.html"}
+      ],
+      "Podcast / Media":[
+        {"name":"PodTalk-1.0.0","entry":"PodTalk-1.0.0/index.html"}
+      ]
+    };
+    // Build flat list for navigation
+    const allTemplates = [];
+    const templateCatMap = {};
+    for (const [cat, items] of Object.entries(categories)) {
+      for (const item of items) {
+        allTemplates.push(item);
+        templateCatMap[item.name] = cat;
+      }
+    }
+
+    const nav = document.getElementById('nav');
+    const searchResults = document.getElementById('searchResults');
+    const searchInput = document.getElementById('search');
+    const viewer = document.getElementById('viewer');
+    const currentNameEl = document.getElementById('currentName');
+    const openNewTab = document.getElementById('openNewTab');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const countEl = document.getElementById('count');
+
+    let currentEntry = null;
+    let filteredList = allTemplates;
+
+    // Count
+    countEl.textContent = allTemplates.length + ' templates in ' + Object.keys(categories).length + ' categories';
+
+    // Render category nav
+    function renderNav() {
+      nav.innerHTML = '';
+      let globalIdx = 1;
+      for (const [cat, items] of Object.entries(categories)) {
+        const group = document.createElement('div');
+        group.className = 'cat-group';
+
+        const header = document.createElement('button');
+        header.className = 'cat-header';
+        header.innerHTML = '<span class="arrow">&#9654;</span><span>' + cat + '</span><span class="cat-badge">' + items.length + '</span>';
+        header.addEventListener('click', () => {
+          header.classList.toggle('open');
+        });
+
+        const itemsDiv = document.createElement('div');
+        itemsDiv.className = 'cat-items';
+
+        for (const item of items) {
+          const el = document.createElement('div');
+          el.className = 'item';
+          el.dataset.name = item.name;
+          el.dataset.entry = item.entry;
+          const displayNum = String(globalIdx).padStart(2, '0');
+          const displayName = item.name.replace(/-master|-gh-pages|-main|-1\.0\.0|-v1\.0\.0|_1_0_0/g, '');
+          const serverTag = item.server ? '<span class="server-badge">SERVER</span>' : '';
+          const folderPath = item.entry.substring(0, item.entry.lastIndexOf('/') + 1);
+          el.innerHTML = '<div class="link"><span class="folder-btn" data-folder="' + folderPath + '" title="Open folder">\uD83D\uDCC2</span><span class="num">' + displayNum + '</span><span class="tname">' + displayName + serverTag + '</span></div>';
+          el.querySelector('.link').addEventListener('click', (e) => {
+            if (e.target.closest('.folder-btn')) return;
+            selectTemplate(item);
+            if (!header.classList.contains('open')) header.classList.add('open');
+          });
+          el.querySelector('.folder-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            window.open(e.target.dataset.folder, '_blank');
+          });
+          itemsDiv.appendChild(el);
+          globalIdx++;
+        }
+
+        group.appendChild(header);
+        group.appendChild(itemsDiv);
+        nav.appendChild(group);
+      }
+    }
+
+    function selectTemplate(item) {
+      currentEntry = item;
+      viewer.src = item.entry;
+      const displayName = item.name.replace(/-master|-gh-pages|-main|-1\.0\.0|-v1\.0\.0|_1_0_0/g, '');
+      currentNameEl.textContent = displayName + ' (' + (templateCatMap[item.name] || '') + ')';
+      openNewTab.href = item.entry;
+
+      // Highlight active
+      document.querySelectorAll('.item.active').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.item[data-name="' + item.name + '"]').forEach(el => el.classList.add('active'));
+
+      // Scroll into view in nav
+      const activeEl = nav.querySelector('.item.active');
+      if (activeEl) activeEl.scrollIntoView({ block: 'nearest' });
+    }
+
+    // Search
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim().toLowerCase();
+      if (q.length === 0) {
+        searchResults.style.display = 'none';
+        nav.style.display = '';
+        return;
+      }
+
+      nav.style.display = 'none';
+      searchResults.style.display = '';
+
+      const terms = q.split(/\s+/);
+      const matches = allTemplates.filter(t => {
+        const searchStr = (t.name + ' ' + (templateCatMap[t.name] || '')).toLowerCase();
+        return terms.every(term => searchStr.includes(term));
+      });
+
+      filteredList = matches;
+      searchResults.innerHTML = '';
+
+      if (matches.length === 0) {
+        searchResults.innerHTML = '<div class="no-result">No results found</div>';
+        return;
+      }
+
+      for (const item of matches) {
+        const el = document.createElement('div');
+        el.className = 'item';
+        el.dataset.name = item.name;
+        el.dataset.entry = item.entry;
+        const displayName = item.name.replace(/-master|-gh-pages|-main|-1\.0\.0|-v1\.0\.0|_1_0_0/g, '');
+        const cat = templateCatMap[item.name] || '';
+        const serverTag = item.server ? '<span class="server-badge">SERVER</span>' : '';
+        const folderPath = item.entry.substring(0, item.entry.lastIndexOf('/') + 1);
+        el.innerHTML = '<div class="link"><span class="folder-btn" data-folder="' + folderPath + '" title="Open folder">\uD83D\uDCC2</span><span class="tname">' + displayName + serverTag + '</span><span class="cat-tag">' + cat + '</span></div>';
+        el.querySelector('.link').addEventListener('click', (e) => {
+          if (e.target.closest('.folder-btn')) return;
+          selectTemplate(item);
+        });
+        el.querySelector('.folder-btn').addEventListener('click', (e) => {
+          e.stopPropagation();
+          window.open(e.target.dataset.folder, '_blank');
+        });
+        if (currentEntry && currentEntry.name === item.name) el.classList.add('active');
+        searchResults.appendChild(el);
+      }
+    });
+
+    // Prev/Next
+    function getCurrentList() {
+      const q = searchInput.value.trim();
+      return q ? filteredList : allTemplates;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      const list = getCurrentList();
+      if (!currentEntry || list.length === 0) return;
+      const idx = list.findIndex(t => t.name === currentEntry.name);
+      const newIdx = idx <= 0 ? list.length - 1 : idx - 1;
+      selectTemplate(list[newIdx]);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      const list = getCurrentList();
+      if (!currentEntry || list.length === 0) return;
+      const idx = list.findIndex(t => t.name === currentEntry.name);
+      const newIdx = idx >= list.length - 1 ? 0 : idx + 1;
+      selectTemplate(list[newIdx]);
+    });
+
+    // Expand/Collapse all
+    document.getElementById('expandAll').addEventListener('click', () => {
+      document.querySelectorAll('.cat-header').forEach(h => h.classList.add('open'));
+    });
+    document.getElementById('collapseAll').addEventListener('click', () => {
+      document.querySelectorAll('.cat-header').forEach(h => h.classList.remove('open'));
+    });
+
+    // Keyboard shortcut
+    document.addEventListener('keydown', (e) => {
+      if (e.target === searchInput) return;
+      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { prevBtn.click(); e.preventDefault(); }
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { nextBtn.click(); e.preventDefault(); }
+    });
+
+    // Init
+    renderNav();
+  </script>
+</body>
+</html>
